@@ -32,7 +32,7 @@ function Signup() {
             return handleError('All feild are required!!')
         }
         try {
-            const url = 'http://localhost:8000/auth/signup';
+            const url = 'https://registration-form-five-liard.vercel.app/auth/signup';
             const response = await fetch(url,{
                 method: "POST",
                 headers: {
