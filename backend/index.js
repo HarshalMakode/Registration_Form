@@ -9,11 +9,22 @@ require('./Models/db');
 
 const PORT = process.env.PORT || 8000;
 
-app.use(cors({
-    origin: [/https:\/\/registration-form-frontend-seven\.vercel\.app$/], 
-    methods: ["GET", "POST", "PUT", "DELETE"],
-    credentials: true
-}));
+const allowedOrigins = [
+    'https://registration-form-frontend-seven.vercel.app',
+    'http://localhost:3000'
+  ];
+  
+  app.use(cors({
+      origin: function (origin, callback) {
+          if (allowedOrigins.includes(origin) || !origin) {
+              callback(null, true);
+          } else {
+              callback(new Error('Not allowed by CORS'));
+          }
+      },
+      methods: ["GET", "POST", "PUT", "DELETE"],
+      credentials: true
+  }));
 
 app.get('/ping',(req,res)=>{
     res.send('PONG');
