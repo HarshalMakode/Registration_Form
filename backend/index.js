@@ -14,7 +14,9 @@ app.get('/ping',(req,res)=>{
 });
 
 app.use(bodyParser.json());
-app.use(cors());
+app.use(cors({
+    origin: '*'
+}));
 app.use('/auth', AuthRouter);
 
 app.listen(PORT, ()=>{
