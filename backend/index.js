@@ -9,12 +9,18 @@ require('./Models/db');
 
 const PORT = process.env.PORT || 8000;
 
+app.use(cors({
+    origin: 'https://registration-form-frontend-seven.vercel.app',
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization']
+}));
+
 app.get('/ping',(req,res)=>{
     res.send('PONG');
 });
 
 app.use(bodyParser.json());
-app.use(cors());
+
 app.use('/auth', AuthRouter);
 
 app.listen(PORT, ()=>{
