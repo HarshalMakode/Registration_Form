@@ -14,17 +14,18 @@ const allowedOrigins = [
     'http://localhost:3000'
   ];
   
-  app.use(cors({
-      origin: function (origin, callback) {
-          if (allowedOrigins.includes(origin) || !origin) {
-              callback(null, true);
-          } else {
-              callback(new Error('Not allowed by CORS'));
-          }
-      },
-      methods: ["GET", "POST", "PUT", "DELETE"],
-      credentials: true
-  }));
+app.use(cors({
+    origin: function (origin, callback) {
+        if (!origin || allowedOrigins.includes(origin)) {
+            callback(null, true);
+        } else {
+            console.error('Blocked by CORS: Origin not allowed ->', origin);
+            callback(new Error('Not allowed by CORS'));
+        }
+    },
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true
+}));
 
 app.get('/ping',(req,res)=>{
     res.send('PONG');
